@@ -1,1 +1,57 @@
+# Ad ogni modifica su "main": prima i test, poi la pubblicazione su GitHub Pages.
+# Sulle pull request si eseguono solo i test.
+name: Test e pubblicazione
 
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm test
+
+  pubblica:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      # Si pubblica solo quello che serve all'app (niente test, README, strumenti).
+      # L'indirizzo assoluto del sito entra nelle anteprime di condivisione (__BASE_URL__).
+      - name: Prepara il sito
+        run: |
+          OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+          REPO="${GITHUB_REPOSITORY#*/}"
+          BASE="https://${OWNER}.github.io/${REPO}/"
+          mkdir _site
+          cp -r index.html sw.js manifest.webmanifest css js fonts icons _site/
+          sed -i "s|__BASE_URL__|${BASE}|g" _site/index.html
+          grep -q "${BASE}icons/og.png" _site/index.html
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deploy
+        uses: actions/deploy-pages@v4
