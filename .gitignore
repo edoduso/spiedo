@@ -1,0 +1,10 @@
+# Sistema e editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dipendenze e prodotti di build
+node_modules/
+_site/
+*.log
