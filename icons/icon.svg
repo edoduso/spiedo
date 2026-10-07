@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Icona spiEDO: asta con costina, mombolino e costina su fondo oliva.
+       Il contenuto sta nel 80% centrale, così funziona anche come icona "maskable". -->
+  <rect width="512" height="512" fill="#3c4320"/>
+  <g stroke="#1d1b12" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="86" y1="256" x2="426" y2="256" stroke="#f4ecd6" stroke-width="14"/>
+    <circle cx="80" cy="256" r="16" fill="#d6f36b"/>
+    <rect x="104" y="180" width="92" height="152" rx="44" fill="#f4ecd6"/>
+    <path d="M132 218v76M150 208v96M168 218v76" fill="none"/>
+    <circle cx="256" cy="256" r="84" fill="#d6f36b"/>
+    <path d="M256 256a10 10 0 1 1 20 0a30 30 0 1 1-60 0a50 50 0 1 1 100 0" fill="none"/>
+    <rect x="316" y="180" width="92" height="152" rx="44" fill="#f4ecd6"/>
+    <path d="M344 218v76M362 208v96M380 218v76" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "spiedo",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "spiEDO: calcolatore e timer per lo spiedo alla bresciana (PWA)",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "test": "node --test test/logica.test.js"
+  }
+}

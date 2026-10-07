@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><title>spiEDO · immagine social</title>
+<!-- Sorgente di icons/og.png (1200 x 630). Per rigenerarla: apri questo file a 1200x630 e fai uno screenshot. -->
+<style>
+@font-face { font-family: 'Archivo Black'; src: url('../fonts/archivo-black.woff2') format('woff2'); }
+@font-face { font-family: 'DM Sans'; src: url('../fonts/dm-sans.woff2') format('woff2'); font-weight: 100 1000; }
+:root { --carta:#f4ecd6; --oliva:#3c4320; --lime:#d6f36b; --inchiostro:#1d1b12; }
+* { box-sizing: border-box; margin: 0; }
+body { width: 1200px; height: 630px; overflow: hidden; background: var(--oliva); color: var(--carta); font-family: 'DM Sans', sans-serif; position: relative; --pf: var(--oliva); }
+.marchio { position: absolute; left: 80px; top: 70px; font: 400 200px/1 'Archivo Black', sans-serif; letter-spacing: -.04em; }
+.marchio b { font-weight: 400; color: var(--lime); }
+.testo { position: absolute; left: 86px; top: 290px; font-size: 44px; line-height: 1.2; color: rgba(244,236,214,.9); }
+.luogo { position: absolute; left: 86px; bottom: 56px; font-size: 28px; letter-spacing: .12em; text-transform: uppercase; color: var(--lime); font-weight: 700; }
+svg.ill { position: absolute; right: 61px; bottom: 40px; width: 640px; height: auto; color: var(--carta); overflow: visible; }
+.asta { stroke: currentColor; stroke-width: 3; stroke-linecap: round; fill: none; }
+.tratto { fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.pp { fill: var(--pf, none); }
+symbol path, symbol circle, symbol ellipse, symbol rect { stroke-linecap: round; stroke-linejoin: round; }
+symbol * { stroke: currentColor; }
+</style></head><body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="p-costine" viewBox="0 0 48 48"><rect class="pp" x="12" y="5" width="24" height="38" rx="11"/><path d="M19 15v18M24 12v24M29 15v18"/></symbol><symbol id="p-coppe" viewBox="0 0 48 48"><circle class="pp" cx="24" cy="24" r="18"/><path d="M24 24a2.5 2.5 0 1 1 5 0a7 7 0 1 1-14 0a11.5 11.5 0 1 1 23 0"/></symbol><symbol id="p-pollo" viewBox="0 0 48 48"><ellipse class="pp" cx="29" cy="19" rx="16" ry="12" transform="rotate(38 29 19)"/><path d="M20 29L10 39"/><circle class="pp" cx="7" cy="40" r="3.6"/><circle class="pp" cx="11" cy="44" r="3.6"/></symbol><symbol id="p-foglia" viewBox="0 0 48 48"><path class="pp" d="M7 41C7 21 20 8 41 7c0 21-13 34-34 34z"/><path d="M7 41L30 18"/></symbol></defs></svg>
+<div class="marchio">spi<b>EDO</b></div>
+<p class="testo">Dosi, procedimento<br>e tempistiche.</p>
+<p class="luogo">Spiedo alla bresciana</p>
+
+<svg class="ill" viewBox="0 0 340 120" role="img" aria-label="Uno spiedo con costine, coppe e pollo alternati a foglie di salvia">
+  <!-- asta e manovella -->
+  <line class="asta" x1="14" y1="70" x2="330" y2="70"/>
+  <circle class="tratto" cx="10" cy="70" r="7" style="fill:var(--lime);color:var(--inchiostro)"/>
+  <!-- pezzi, in ordine: costina, coppa, pollo, coppa, costina -->
+  <use class="tratto" href="#p-costine"   x="20"  y="42" width="56" height="56" style="--n:0;color:var(--inchiostro);--pf:var(--lime)"/>
+  <use class="tratto" href="#p-foglia"    x="74"  y="55" width="28" height="28" style="--n:1"/>
+  <use class="tratto" href="#p-coppe" x="100" y="42" width="56" height="56" style="--n:2;--pf:var(--oliva)"/>
+  <use class="tratto" href="#p-foglia"    x="154" y="55" width="28" height="28" style="--n:3"/>
+  <use class="tratto" href="#p-pollo"     x="180" y="42" width="56" height="56" style="--n:4;color:var(--inchiostro);--pf:var(--lime)"/>
+  <use class="tratto" href="#p-foglia"    x="234" y="55" width="28" height="28" style="--n:5"/>
+  <use class="tratto" href="#p-costine"   x="260" y="42" width="56" height="56" style="--n:6;color:var(--inchiostro);--pf:var(--lime)"/>
+  <!-- freccia: lo spiedo gira -->
+  <path class="tratto" d="M236 24c18-12 46-10 62 4"/>
+  <path class="tratto" d="M290 21l9 7-12 3"/>
+</svg>
+</body></html>

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>spiEDO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="spiEDO: dosi e timer per lo spiedo alla bresciana.">
+  <meta name="theme-color" content="#3c4320">
+
+  <!-- Anteprima quando si condivide il link (WhatsApp, Telegram, iMessage...).
+       __BASE_URL__ viene sostituito da solo alla pubblicazione (.github/workflows/pubblica.yml):
+       i social vogliono indirizzi assoluti. In locale resta com'è, senza conseguenze. -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:site_name" content="spiEDO">
+  <meta property="og:title" content="spiEDO · dosi e tempi dello spiedo alla bresciana">
+  <meta property="og:description" content="Dici quanti siete e ti calcola dosi, salature e untate per tutta la cottura.">
+  <meta property="og:url" content="__BASE_URL__">
+  <meta property="og:image" content="__BASE_URL__icons/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="spiEDO: uno spiedo con coppe, costine e pollo alternati a foglie di salvia">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- PWA: installabile su Android e iOS -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="spiEDO">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="preload" href="fonts/archivo-black.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ========== SPRITE: icone (24px) e pittogrammi (48px) ========== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- icone -->
+    <symbol id="i-imposta" viewBox="0 0 24 24"><path d="M4 7h9M19 7h1M4 17h1M11 17h9"/><circle cx="16" cy="7" r="2.5"/><circle cx="8" cy="17" r="2.5"/></symbol>
+    <symbol id="i-dosi" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4.5 6h.01M4.5 12h.01M4.5 18h.01" stroke-width="3"/></symbol>
+    <symbol id="i-fuoco" viewBox="0 0 24 24"><path d="M12 3c.6 3.2 5 5.2 5 10a5 5 0 0 1-10 0c0-2 .9-3.2 2.2-4.2.1 1.8.8 2.8 1.8 3 .2-3-1-5 1-8.8z"/></symbol>
+    <symbol id="i-sale" viewBox="0 0 24 24"><path d="M8 3h8l1 4H7z"/><path d="M7 7h10v2l-1 11H8L7 9z"/><path d="M10 12h.01M14 12h.01M12 15.5h.01" stroke-width="2.6"/></symbol>
+    <symbol id="i-burro" viewBox="0 0 24 24"><path d="M3 9.5l9-4 9 4-9 4z"/><path d="M3 9.5v6l9 4 9-4v-6M12 13.5v6"/></symbol>
+    <symbol id="i-temp" viewBox="0 0 24 24"><path d="M10 14.2V5a2 2 0 1 1 4 0v9.2a4 4 0 1 1-4 0z"/><path d="M12 9v7"/></symbol>
+    <symbol id="i-assaggio" viewBox="0 0 24 24"><path d="M12 21v-8"/><path d="M7.5 4.5c0 3 1.6 6 4.5 6s4.5-3 4.5-6c0-1.2-2-2-4.5-2s-4.5.8-4.5 2z"/></symbol>
+    <symbol id="i-fine" viewBox="0 0 24 24"><path d="M5 21V4M5 4h12l-2.5 4L17 12H5"/></symbol>
+    <symbol id="i-via" viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 1 2.1 5"/><path d="M5 18v-5h5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-piu" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-meno" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="3"/><path d="M4 10h16M8.5 3v4M15.5 3v4"/></symbol>
+    <symbol id="i-sole" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6L7 7M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/></symbol>
+    <symbol id="i-orologio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 5v5h5"/><path d="M5.2 14a7.5 7.5 0 1 0 1.3-6.2L4 10"/></symbol>
+    <symbol id="i-installa" viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4"/><path d="M5 12v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></symbol>
+    <symbol id="i-persone" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-4 3-6.5 6.5-6.5s6.5 2.5 6.5 6.5"/><path d="M16 4.8a3.5 3.5 0 0 1 0 6.4M18 13.8c2.2.8 3.5 2.8 3.5 6.2"/></symbol>
+    <symbol id="i-spiedo" viewBox="0 0 24 24"><path d="M2.5 12h19"/><rect x="5" y="7.5" width="4" height="9" rx="2"/><circle cx="15" cy="12" r="3.5"/></symbol>
+    <symbol id="i-chiudi" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+
+    <!-- pittogrammi dei pezzi (usati nella spiedatura e nell'illustrazione) -->
+    <symbol id="p-costine" viewBox="0 0 48 48"><rect class="pp" x="12" y="5" width="24" height="38" rx="11"/><path d="M19 15v18M24 12v24M29 15v18"/></symbol>
+    <symbol id="p-coppe" viewBox="0 0 48 48"><circle class="pp" cx="24" cy="24" r="18"/><path d="M24 24a2.5 2.5 0 1 1 5 0a7 7 0 1 1-14 0a11.5 11.5 0 1 1 23 0"/></symbol>
+    <symbol id="p-lombi" viewBox="0 0 48 48"><path class="pp" d="M6 18c0-5 4-8 9-8h18c5 0 9 3 9 8v12c0 5-4 8-9 8H15c-5 0-9-3-9-8z"/><path d="M14 18v12M24 16v16M34 18v12"/></symbol>
+    <symbol id="p-pollo" viewBox="0 0 48 48"><ellipse class="pp" cx="29" cy="19" rx="16" ry="12" transform="rotate(38 29 19)"/><path d="M20 29L10 39"/><circle class="pp" cx="7" cy="40" r="3.6"/><circle class="pp" cx="11" cy="44" r="3.6"/></symbol>
+    <symbol id="p-uccellini" viewBox="0 0 48 48"><ellipse class="pp" cx="23" cy="28" rx="15" ry="10"/><circle class="pp" cx="37" cy="17" r="6"/><path d="M42.5 16l4.5 2-4.5 2M8.5 26L3 21M25 38v5M31 37l2 5"/></symbol>
+    <symbol id="p-coniglio" viewBox="0 0 48 48"><circle class="pp" cx="24" cy="32" r="11"/><ellipse class="pp" cx="17.5" cy="13" rx="4" ry="10"/><ellipse class="pp" cx="30.5" cy="13" rx="4" ry="10"/><path d="M21 31h.01M27 31h.01" stroke-width="3"/></symbol>
+    <symbol id="p-patate" viewBox="0 0 48 48"><path class="pp" d="M8 27c0-10 9-19 20-19 9 0 13 7 11 16-2 11-11 17-20 15C12 38 8 33 8 27z"/><path d="M20 21h.01M30 28h.01M31 16h.01M17 31h.01" stroke-width="3"/></symbol>
+    <symbol id="p-burro" viewBox="0 0 48 48"><path class="pp" d="M6 20L14 9h28l-8 11z"/><path class="pp" d="M34 20L42 9v22l-8 11z"/><rect class="pp" x="6" y="20" width="28" height="22" rx="2"/><path d="M13 29h14M13 35h9"/></symbol>
+    <symbol id="p-sale" viewBox="0 0 48 48"><path class="pp" d="M16 6h16a4 4 0 0 1 4 4v6H12v-6a4 4 0 0 1 4-4z"/><path class="pp" d="M12 16h24l-2 25a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3z"/><path d="M20 11h.01M24 11h.01M28 11h.01" stroke-width="3"/><path d="M13 27h22"/></symbol>
+    <symbol id="p-foglia" viewBox="0 0 48 48"><path class="pp" d="M7 41C7 21 20 8 41 7c0 21-13 34-34 34z"/><path d="M7 41L30 18"/></symbol>
+  </defs>
+</svg>
+
+<div class="app" id="app" data-vista="imposta">
+
+  <!-- barra superiore: marchio e riepilogo -->
+  <header class="barra">
+    <a class="marchio" href="#imposta" aria-label="spiEDO">spi<b>EDO</b></a>
+    <span class="barra__riepilogo" id="barra-riepilogo"></span>
+  </header>
+
+  <main class="schermate">
+    <section class="vista" id="vista-imposta" aria-labelledby="tab-imposta"></section>
+    <section class="vista" id="vista-dosi" aria-labelledby="tab-dosi"></section>
+    <section class="vista" id="vista-cottura" aria-labelledby="tab-cottura"></section>
+  </main>
+
+  <!-- barra di navigazione in basso -->
+  <nav class="tabbar" aria-label="Sezioni">
+    <button class="tab" id="tab-imposta" data-azione="vai" data-vista="imposta">
+      <svg class="ico"><use href="#i-imposta"/></svg><span>Imposta</span>
+    </button>
+    <button class="tab" id="tab-dosi" data-azione="vai" data-vista="dosi">
+      <svg class="ico"><use href="#i-dosi"/></svg><span>Dosi</span>
+    </button>
+    <button class="tab" id="tab-cottura" data-azione="vai" data-vista="cottura">
+      <svg class="ico"><use href="#i-fuoco"/></svg><span>Cottura</span>
+    </button>
+  </nav>
+</div>
+
+<div id="sheet-root"></div>
+<div id="toast-root" aria-live="polite"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
